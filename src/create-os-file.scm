@@ -21,8 +21,8 @@
 ;;        https://www.linux.org/docs/man5/os-release.html
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(Define (get-os-info)
-  (let* ((uname-list (uname)))
+(define (get-os-info)
+  (let ((uname-list (uname)))
     (list
      (list "NAME=" "GNU Guix")
      (list "ID=" (vector-ref uname-list 1))
@@ -61,4 +61,10 @@
   (let ((port (open-output-file "os-release")))
     (map (lambda (sublist) (write-line (string-concatenate sublist) port)) distro-info)
     (close-port port)))
+
+
+(define (move-release-file)
+  (system "sudo mv os-release /etc"))
+
+
 
